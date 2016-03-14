@@ -34,7 +34,7 @@ class ViewController: UIViewController {
    
     
     @IBAction func numberPressed (button: UIButton!) {
-        
+        romanConverter.enabled = true
         runningNumber += "\(button.tag)"
         outputLabel.text = runningNumber
         
@@ -59,6 +59,8 @@ class ViewController: UIViewController {
     
     @IBAction func equalPressed (sender: UIButton) {
         processOperation(currentOperation)
+        outputLabel.text = result
+        romanConverter.enabled = true
     }
     
     func processOperation (op: Operation) {
@@ -96,9 +98,13 @@ class ViewController: UIViewController {
         }
         
     }
+    @IBOutlet weak var romanConverter       :UIButton!
     
     @IBAction func romanNumberPressed (sender: UIButton) {
+
         intToRoman(Int(outputLabel.text!)!)
+        romanConverter.enabled = false
+        
         
     }
     
@@ -106,8 +112,8 @@ class ViewController: UIViewController {
     func intToRoman(num: Int) -> String {
         var romanValue = ""
         var number: Int = num
-        var romanSymbolArray = ["X","IX","V","IV","I"]
-        var numberValueArray = [10,9,5,4,1]
+        var romanSymbolArray = ["M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"]
+        var numberValueArray = [1000,900,500,400,100,90,50,40,10,9,5,4,1]
         
         
         for(var i = 0; number != 0; i++){
@@ -123,8 +129,7 @@ class ViewController: UIViewController {
         return romanValue
         
     }
-    
-    
+
     
     
     @IBAction func clearButtonPressed (sender: UIButton) {
