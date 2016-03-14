@@ -70,13 +70,13 @@ class ViewController: UIViewController {
             rightValue = runningNumber
             runningNumber = ""
             if currentOperation == Operation.Multiply {
-                result = "\(Double(leftValue)! * Double(rightValue)!)"
+                result = "\(Int(leftValue)! * Int(rightValue)!)"
             } else if currentOperation == Operation.Divide {
-                result = "\(Double(leftValue)! / Double(rightValue)!)"
+                result = "\(Int(leftValue)! / Int(rightValue)!)"
             } else if currentOperation == Operation.Subtract {
-                result = "\(Double(leftValue)! - Double(rightValue)!)"
+                result = "\(Int(leftValue)! - Int(rightValue)!)"
             } else if currentOperation == Operation.Add {
-                result = "\(Double(leftValue)! + Double(rightValue)!)"
+                result = "\(Int(leftValue)! + Int(rightValue)!)"
             }
             
             leftValue = result
@@ -96,31 +96,40 @@ class ViewController: UIViewController {
         }
         
     }
-//    
-//    func intToRoman(num: Int) -> String {
-//        var romanValue = ""
-//        var number: Int = num
-//        var romanSymbolArray = ["X","IX","V","IV","I"]
-//        var numberValueArray = [10,9,5,4,1]
-//        
-//        
-//        for(var i = 0; number != 0; i++){
-//            while(number >= numberValueArray[i])
-//            {
-//                number -= numberValueArray[i]
-//                //subtract from our number the value at position i in the array
-//                romanValue += romanSymbolArray[i]
-//                //add the symbol for the value of i
-//            }
-//        }
-//        return romanValue
-//        
-//    }
+    
+    @IBAction func romanNumberPressed (sender: UIButton) {
+        intToRoman(Int(outputLabel.text!)!)
+        
+    }
+    
+    
+    func intToRoman(num: Int) -> String {
+        var romanValue = ""
+        var number: Int = num
+        var romanSymbolArray = ["X","IX","V","IV","I"]
+        var numberValueArray = [10,9,5,4,1]
+        
+        
+        for(var i = 0; number != 0; i++){
+            while(number >= numberValueArray[i])
+            {
+                number -= numberValueArray[i]
+                //subtract from our number the value at position i in the array
+                romanValue += romanSymbolArray[i]
+                //add the symbol for the value of i
+            }
+        }
+        outputLabel.text = romanValue
+        return romanValue
+        
+    }
+    
     
     
     
     @IBAction func clearButtonPressed (sender: UIButton) {
         outputLabel.text = ""
+        currentOperation = Operation.Empty
         leftValue = ""
         rightValue = ""
         result = ""
